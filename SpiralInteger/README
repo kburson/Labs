@@ -1,10 +1,12 @@
 SpiralInteger
 
-this is a maven project.  
-Run mvn clean install to get an executable jar, 
-then execute the jar with :
+this is a maven project.  Run the following command:
+ 
+mvn clean package
 
-java -jar SpiralInteger <args...>
+ to get an executable jar, then execute the jar with :
+
+java -jar SpiralInteger-1.0-*.jar <args...>
 
 The main app will take an infinite list of integer values.  
 Each value will generate and print a spiral matrix of all integers from 0 to the value entered.

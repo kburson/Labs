@@ -1,0 +1,20 @@
+SpiralInteger
+
+this is a maven project.  
+Run mvn clean install to get an executable jar, 
+then execute the jar with :
+
+java -jar SpiralInteger <args...>
+
+The main app will take an infinite list of integer values.  
+Each value will generate and print a spiral matrix of all integers from 0 to the value entered.
+
+If the value entered is < 0 the matrix will reverse the spiral (print backwards)
+
+If a value is preceeded with the word 'primes' then only the prime numbers in the spiral will print
+
+If the value is preceeded with both 'star' then all numbers will be replaced with '*'.
+
+Try the following input:
+
+72 -72 primes 72 star primes 72 star 72

@@ -4,6 +4,8 @@ import java.awt.Point;
 
 public class SpiralIntegerFactory {
 
+	private static final SpiralIntegerFactory FACTORY = new SpiralIntegerFactory();
+	
 	private static final int FILL_DOWN = 1, FILL_UP = -1, FILL_RIGHT = 1,
 			FILL_LEFT = -1;
 	private static final int FILL_FORWARD = 1, FILL_REVERSE = -1;
@@ -15,8 +17,12 @@ public class SpiralIntegerFactory {
 	// private static final int UPPER_RIGHT_CORNER = 8;
 
 	// #####################################
+	
+	public static SpiralIntegerFactory getInstance() { return FACTORY; }
 
-	public static int countSequenceToValue(final int value,
+	// #####################################
+	
+	public int countSequenceToValue(final int value,
 			final boolean columns) {
 
 		int increment = (columns ? 1 : 2); // columns or rows
@@ -30,15 +36,15 @@ public class SpiralIntegerFactory {
 		return count;
 	}
 
-	public static int calculateColumns(final int maxValue) { // odd
+	public int calculateColumns(final int maxValue) { // odd
 		return countSequenceToValue(maxValue, true);
 	}
 
-	public static int calculateRows(final int maxValue) { // even
+	public int calculateRows(final int maxValue) { // even
 		return countSequenceToValue(maxValue, false);
 	}
 
-	public static int calculateValueAtCorner(final int offsetFromCenter,
+	public int calculateValueAtCorner(final int offsetFromCenter,
 			final int cornerSeed) {
 
 		int value = 0;
@@ -48,7 +54,7 @@ public class SpiralIntegerFactory {
 		return value;
 	}
 
-	public static Point calculateCenter(final int rowCount,
+	public Point calculateCenter(final int rowCount,
 			final int columnCount) {
 		int x, y;
 		y = (int) Math.floor((rowCount - 1) / 2);
@@ -58,7 +64,7 @@ public class SpiralIntegerFactory {
 
 	// -------------------------------------------------------
 
-	public static IntegerMatrix createMatrix(final int maximumValue) {
+	public IntegerMatrix createMatrix(final int maximumValue) {
 
 		final int maxValue = Math.abs(maximumValue);
 		final Point lowerLeft = new Point(calculateColumns(maxValue) - 1,
@@ -70,13 +76,13 @@ public class SpiralIntegerFactory {
 		return fillMatrix(matrix);
 	}
 
-	public static IntegerMatrix fillMatrix(final IntegerMatrix matrix) {
+	public IntegerMatrix fillMatrix(final IntegerMatrix matrix) {
 
 		setOrigin(matrix);
 
 		if (matrix.getRowCount() == 1) { // 0 or 1 columns
 			
-			Integer cornerValue = 0;
+			final Integer cornerValue = 0;
 			fillRow(matrix, new Point(0, 0), new Point(
 					matrix.getColumnCount() - 1, 0), cornerValue, FILL_RIGHT,
 					FILL_FORWARD);
@@ -124,11 +130,11 @@ public class SpiralIntegerFactory {
 
 	// -------------------------------------------------------
 
-	private static void setOrigin(final IntegerMatrix matrix) {
+	private void setOrigin(final IntegerMatrix matrix) {
 		matrix.setPointValue(matrix.getMatrixCenter(), 0);
 	}
 
-	private static void fillColumn(final IntegerMatrix matrix,
+	private void fillColumn(final IntegerMatrix matrix,
 			final Point point0, final Point point1,
 			final Integer startingValue, final int rowDelta,
 			final int valueDelta) {
@@ -146,7 +152,7 @@ public class SpiralIntegerFactory {
 		}
 	}
 
-	private static void fillRow(final IntegerMatrix matrix, final Point point0,
+	private void fillRow(final IntegerMatrix matrix, final Point point0,
 			final Point point1, final Integer startingValue,
 			final int columnDelta, final int valueDelta) {
 

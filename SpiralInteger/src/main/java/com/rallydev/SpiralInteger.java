@@ -1,60 +1,83 @@
 package com.rallydev;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 
-public class SpiralInteger {
-	private transient final String borderLine;
-	private transient final SpiralIntegerPrinter printer;
+public final class SpiralInteger {
+	public transient final String borderLine;
 
-	public static void main(final String[] args) {
-		final SpiralInteger obj = new SpiralInteger();
-		obj.processInput(args);
+
+	private transient ISpiralIntegerFormatter formatter = null;
+	private transient PrintStream printStream = null;
+
+	public static SpiralInteger create() {
+		final SpiralInteger spiralInteger = new SpiralInteger();
+		spiralInteger.setPrinter(new SpiralIntegerFormatter());
+		spiralInteger.setPrintStream(System.out);
+		return spiralInteger;
 	}
 
-	public SpiralInteger() {
+	public static void main(final String[] args) {
+		SpiralInteger.create().processInput(args);
+	}
+
+	public void setPrinter(final ISpiralIntegerFormatter printer) {
+		if (printer != null) {
+			this.formatter = printer;
+		}
+	}
+
+	public void setPrintStream(final PrintStream stream) {
+		if (stream != null) {
+			printStream = stream;
+		}
+	}
+
+	private SpiralInteger() {
 		final char[] border = new char[80];
 		Arrays.fill(border, '-');
 		borderLine = String.valueOf(border);
-		printer = new SpiralIntegerPrinter();
 	}
 
-	private void processInput(final String[] args) {
+	public void processInput(final String[] args) {
 
 		boolean starPrimeNumbers = false;
 		boolean showPrimeOnly = false;
 
 		for (String arg : args) {
 			if (arg.matches("[-]?[0-9]+")) {
-				printSpiral(Integer.valueOf(arg), showPrimeOnly,
-						starPrimeNumbers);
+				
+				final Integer maxValue = Integer.valueOf(arg);
+				printStream.printf("\n\n%s\nSpiralInteger [%d] (%sclockwise%s)\n%s\n",
+						borderLine, maxValue, (maxValue < 0 ? "counter-" : ""),
+						(showPrimeOnly ? " primes" : ""), borderLine);
+
+				printSpiral(maxValue, showPrimeOnly, starPrimeNumbers);
+				
 				showPrimeOnly = false;
 				starPrimeNumbers = false;
+				
 			} else {
 				if (arg.compareToIgnoreCase("prime") == 0) {
 					showPrimeOnly = true;
 				} else if (arg.compareToIgnoreCase("star") == 0) {
 					starPrimeNumbers = true;
 				} else {
-					System.out.printf("\n!!! Invalid user input '%s'\n", arg);
+					printStream.printf("\n!!! Invalid user input '%s'\n", arg);
 				}
 			}
 		}
 	}
 
-	private void printSpiral(final Integer maxValue,
+	public void printSpiral(final Integer maxValue,
 			final boolean showPrimeNumbersOnly, final boolean starPrimeNumbers) {
 
-		final Integer val = Integer.valueOf(maxValue);
-
-		System.out.printf("\n%s\nSpiralInteger [%d] (%sclockwise%s)\n%s\n",
-				borderLine, val, (val < 0 ? "counter-" : ""),
-				(showPrimeNumbersOnly ? " primes" : ""), borderLine);
-
-		System.out.println(printer.setPrintClockwise(maxValue >= 0)
+		printStream.println(
+				 formatter
+				.setPrintClockwise(maxValue >= 0)
 				.setShowPrimeNumbersOnly(showPrimeNumbersOnly)
 				.setPrintStars(starPrimeNumbers)
-				.setPrintClockwise(maxValue >= 0)
-				.print(SpiralIntegerFactory.createMatrix(maxValue)));
+				.print(SpiralIntegerFactory.getInstance().createMatrix(Math.abs(maxValue))));
 
 	}
 

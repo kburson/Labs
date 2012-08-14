@@ -5,6 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 final public class SpiralIntegerFactoryTest {
+	
+	private static final SpiralIntegerFactory factory = SpiralIntegerFactory.getInstance();
+
 	// | 0 1 2 3 4 center = 2,2 : colCount = 4, rowCount = 4
 	// --+-------------
 	// 0 | 20 21 22 23 24
@@ -20,13 +23,13 @@ final public class SpiralIntegerFactoryTest {
 	public void getValueReturnsCorrectValue() {
 		final String format = "%d should not be clockwise";
 		
-		assertEquals(String.format(format, 0), 0, SpiralIntegerFactory
+		assertEquals(String.format(format, 0), 0, factory
 				.createMatrix(0).getMaxValue());
 		
-		assertEquals(String.format(format, 1), 1, SpiralIntegerFactory
+		assertEquals(String.format(format, 1), 1, factory
 				.createMatrix(1).getMaxValue());
 		
-		assertEquals(String.format(format, 99), 99, SpiralIntegerFactory
+		assertEquals(String.format(format, 99), 99, factory
 				.createMatrix(99).getMaxValue());
 	}
 
@@ -37,7 +40,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRows = 1;
 		final int expectedCols = 2;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 		
 		assertEquals(String.format("value[%d] does not have %d rows!",value,expectedRows),expectedRows,matrix.getRowCount());
 		assertEquals(String.format("value[%d] does not have %d rows!",value,expectedRows),expectedRows,matrix.getMatrixCopy().size());
@@ -52,7 +55,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRows = 3;
 		final int expectedCols = 3;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 		
 		assertEquals(String.format("value[%d] does not have %d rows!",value,expectedRows),expectedRows,matrix.getRowCount());
 		assertEquals(String.format("value[%d] does not have %d rows!",value,expectedRows),expectedRows,matrix.getMatrixCopy().size());
@@ -69,7 +72,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRows = 1;
 		final int expectedCols = 1;
 		final int value = 0;
-		final IntegerMatrix matrix = SpiralIntegerFactory
+		final IntegerMatrix matrix = factory
 				.createMatrix(value);
 		final String format = "value[%d] does not have %d columns!";
 		assertEquals(String.format(format, value, expectedRows), expectedRows,
@@ -83,7 +86,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedColumnCount = 2;
 		for (int value = 1; value <= 3; value++) {
 			assertEquals(String.format("value[%d] does not have %d columns!",
-					value, expectedColumnCount), expectedColumnCount, SpiralIntegerFactory
+					value, expectedColumnCount), expectedColumnCount, factory
 					.createMatrix(value).getColumnCount());
 		}
 	}
@@ -93,7 +96,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedColumnCount = 3;
 		for (int Values = 4; Values <= 8; Values++) {
 			assertEquals(String.format("value[%d] does not have %d columns!",
-					Values, expectedColumnCount), expectedColumnCount, SpiralIntegerFactory
+					Values, expectedColumnCount), expectedColumnCount, factory
 					.createMatrix(Values).getColumnCount());
 		}
 	}
@@ -103,7 +106,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedColumnCount = 4;
 		for (int i = 9; i <= 15; i++) {
 			assertEquals(String.format("value[%d] does not have %d columns!",
-					i, expectedColumnCount), expectedColumnCount, SpiralIntegerFactory
+					i, expectedColumnCount), expectedColumnCount, factory
 					.createMatrix(i).getColumnCount());
 		}
 	}
@@ -113,7 +116,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedColumnCount = 5;
 		for (int i = 16; i <= 24; i++) {
 			assertEquals(String.format("value[%d] does not have %d columns!",
-					i, expectedColumnCount), expectedColumnCount, SpiralIntegerFactory
+					i, expectedColumnCount), expectedColumnCount, factory
 					.createMatrix(i).getColumnCount());
 		}
 	}
@@ -125,7 +128,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRowCount = 1;
 		for (int i = 0; i <= 1; i++) {
 			assertEquals(String.format("value[%d] does not have %d rows!", i,
-					expectedRowCount), expectedRowCount, SpiralIntegerFactory.createMatrix(i)
+					expectedRowCount), expectedRowCount, factory.createMatrix(i)
 					.getRowCount());
 		}
 	}
@@ -135,7 +138,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRowCount = 2;
 		for (int i = 2; i <= 5; i++) {
 			assertEquals(String.format("value[%d] does not have %d rows!", i,
-					expectedRowCount), expectedRowCount, SpiralIntegerFactory.createMatrix(i)
+					expectedRowCount), expectedRowCount, factory.createMatrix(i)
 					.getRowCount());
 		}
 	}
@@ -145,7 +148,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRowCount = 3;
 		for (int i = 6; i <= 11; i++) {
 			assertEquals(String.format("value[%d] does not have %d rows!", i,
-					expectedRowCount), expectedRowCount, SpiralIntegerFactory.createMatrix(i)
+					expectedRowCount), expectedRowCount, factory.createMatrix(i)
 					.getRowCount());
 		}
 	}
@@ -155,7 +158,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRowCount = 4;
 		for (int i = 12; i <= 19; i++) {
 			assertEquals(String.format("value[%d] does not have %d rows!", i,
-					expectedRowCount), expectedRowCount, SpiralIntegerFactory.createMatrix(i)
+					expectedRowCount), expectedRowCount, factory.createMatrix(i)
 					.getRowCount());
 		}
 	}
@@ -165,7 +168,7 @@ final public class SpiralIntegerFactoryTest {
 		final int expectedRowCount = 5;
 		for (int i = 20; i <= 29; i++) {
 			assertEquals(String.format("value[%d] does not have %d rows!", i,
-					expectedRowCount), expectedRowCount, SpiralIntegerFactory.createMatrix(i)
+					expectedRowCount), expectedRowCount, factory.createMatrix(i)
 					.getRowCount());
 		}
 	}
@@ -178,7 +181,7 @@ final public class SpiralIntegerFactoryTest {
 		int expectedRows = 1;
 		int expectedCols = 1;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expectedRows, matrix.getMatrixCopy().size());
 		assertEquals(expectedCols, matrix.getMatrixCopy().get(0).size());
@@ -189,7 +192,7 @@ final public class SpiralIntegerFactoryTest {
 		int expectedRows = 1;
 		int expectedCols = 2;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(1);
+		final IntegerMatrix matrix = factory.createMatrix(1);
 
 		assertEquals(expectedRows, matrix.getMatrixCopy().size());
 		assertEquals(expectedCols, matrix.getMatrixCopy().get(0).size());
@@ -201,7 +204,7 @@ final public class SpiralIntegerFactoryTest {
 		int expectedRows = 2;
 		int expectedCols = 2;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expectedRows, matrix.getMatrixCopy().size());
 		assertEquals(expectedCols, matrix.getMatrixCopy().get(0).size());
@@ -213,7 +216,7 @@ final public class SpiralIntegerFactoryTest {
 		int expectedRows = 2;
 		int expectedCols = 3;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expectedRows, matrix.getMatrixCopy().size());
 		assertEquals(expectedCols, matrix.getMatrixCopy().get(0).size());
@@ -225,7 +228,7 @@ final public class SpiralIntegerFactoryTest {
 		int expectedRows = 3;
 		int expectedCols = 3;
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expectedRows, matrix.getMatrixCopy().size());
 		assertEquals(expectedCols, matrix.getMatrixCopy().get(0).size());
@@ -240,7 +243,7 @@ final public class SpiralIntegerFactoryTest {
 		final int col = 3;
 		final Integer expected = Integer.valueOf(9);
 
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expected, matrix.getValue(col, row));
 	}
@@ -252,7 +255,7 @@ final public class SpiralIntegerFactoryTest {
 		final int col = 1;
 		final Integer expected = Integer.valueOf(1);
 
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(value);
+		final IntegerMatrix matrix = factory.createMatrix(value);
 
 		assertEquals(expected, matrix.getValue(col, row));
 
@@ -263,7 +266,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test	// happy path 1x1, make sure 'origin' is represented correctly
 	public void matrixForValue_0_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(0);
+		final IntegerMatrix matrix = factory.createMatrix(0);
 
 		assertEquals(1, matrix.getRowCount());
 		assertEquals(1, matrix.getColumnCount());
@@ -274,7 +277,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test	// 1x2 special case
 	public void matrixForValue_1_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(1);
+		final IntegerMatrix matrix = factory.createMatrix(1);
 
 		assertEquals(1, matrix.getRowCount());
 		assertEquals(2, matrix.getColumnCount());
@@ -286,7 +289,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test	// 2x2 with null value
 	public void matrixForValue_2_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(2);
+		final IntegerMatrix matrix = factory.createMatrix(2);
 
 		assertEquals(2, matrix.getRowCount());
 		assertEquals(2, matrix.getColumnCount());
@@ -300,7 +303,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test	// happy path 2x2
 	public void matrixForValue_3_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(3);
+		final IntegerMatrix matrix = factory.createMatrix(3);
 
 		assertEquals(2, matrix.getRowCount());
 		assertEquals(2, matrix.getColumnCount());
@@ -317,7 +320,7 @@ final public class SpiralIntegerFactoryTest {
 	// 2x3 skip top row and null value in 1st column
 	public void matrixForValue_4_isValid() {
 
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(4);
+		final IntegerMatrix matrix = factory.createMatrix(4);
 
 		assertEquals(2, matrix.getRowCount());
 		assertEquals(3, matrix.getColumnCount());
@@ -337,7 +340,7 @@ final public class SpiralIntegerFactoryTest {
 	// 2x3 requires skip top row of bounding square
 	public void matrixForValue_5_isValid() {
 
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(5);
+		final IntegerMatrix matrix = factory.createMatrix(5);
 
 		assertEquals(2, matrix.getRowCount());
 		assertEquals(3, matrix.getColumnCount());
@@ -354,7 +357,7 @@ final public class SpiralIntegerFactoryTest {
 	// Happy path for 3x3
 	public void matrixForValue_6_isValid() {
 
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(6);
+		final IntegerMatrix matrix = factory.createMatrix(6);
 
 		assertEquals(3, matrix.getRowCount());
 		assertEquals(3, matrix.getColumnCount());
@@ -374,7 +377,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test
 	public void matrixForValue_7_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(7);
+		final IntegerMatrix matrix = factory.createMatrix(7);
 
 		assertEquals(3, matrix.getRowCount());
 		assertEquals(3, matrix.getColumnCount());
@@ -394,7 +397,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test
 	public void matrixForValue_8_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(8);
+		final IntegerMatrix matrix = factory.createMatrix(8);
 
 		assertEquals(3, matrix.getRowCount());
 		assertEquals(3, matrix.getColumnCount());
@@ -410,7 +413,7 @@ final public class SpiralIntegerFactoryTest {
 	@Test
 	public void matrixForValue_9_isValid() {
 		
-		final IntegerMatrix matrix = SpiralIntegerFactory.createMatrix(9);
+		final IntegerMatrix matrix = factory.createMatrix(9);
 
 		assertEquals(3, matrix.getRowCount());
 		assertEquals(4, matrix.getColumnCount());
